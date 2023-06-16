@@ -12,11 +12,6 @@ public:
     disjoint_test(disjoint_test&&) noexcept = default;
     ~disjoint_test() noexcept
     {
-        for (int i : ds.storage())
-        {
-            ::std::cout << i << " ";
-        }
-        ::std::cout << ::std::endl;
     }
     
 protected:
