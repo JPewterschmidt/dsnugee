@@ -1,8 +1,10 @@
-add_rules("mode.debug", "mode.release")
+add_rules("mode.debug")
 
 add_requires("fmt", "gflags", "gtest")
 add_packages("fmt", "gflags", "gtest")
-set_languages("c++20")
+set_languages("c++2b")
+set_toolset("cc", "gcc")
+set_toolset("cxx", "g++")
 
 target("dsnugee")
     set_version("0.0.1")
@@ -21,6 +23,7 @@ target("dsnugee")
     end)
 
 target("dsnugee-unittest")
+    add_packages("gtest")
     set_kind("binary")
     add_files("tests/*.cc")
 
@@ -41,9 +44,8 @@ target("dsnugee-unittest")
     end)
 
 target("example")
-    set_kind("binary")
     add_cxflags("-Wconversion", { force = true })
-    add_files("examples/*.cc")
+    add_files("examples/*.cc", "src/*.cc")
     add_deps("dsnugee")
     add_includedirs("src", "helpers", { public = true })
     set_toolchains("gcc")

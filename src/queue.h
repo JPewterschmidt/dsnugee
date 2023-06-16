@@ -13,7 +13,7 @@ class q_policy1
 public:
     explicit q_policy1(size_t size) noexcept : m_capacity{ size } { }
 
-    bool full()     const noexcept { return size() == m_capacity; }
+    bool full()     const noexcept { return actual_size() == m_capacity; }
     bool empty()    const noexcept { return m_rear == m_front; }
 
     size_t next_rear()      const noexcept { return (m_rear  + 1)               % (m_capacity); }
@@ -25,10 +25,11 @@ public:
     size_t increase_front()         noexcept { return ::std::exchange(m_front, next_front());   }
     size_t decrease_rear()          noexcept { return m_rear  = previous_rear();    }
     size_t decrease_front()         noexcept { return m_front = previous_front();   }
-    size_t size()             const noexcept { return m_size; }
+    size_t actual_size()      const noexcept { return m_size; }
+    size_t theoratical_size() const noexcept { return (m_rear - m_front + m_capacity) % m_capacity; }
 
-    void increase_size()            noexcept { ++m_size; }
-    void decrease_size()            noexcept { --m_size; }
+    void increase_size() noexcept { ++m_size; }
+    void decrease_size() noexcept { --m_size; }
 
     ::std::string describe(::std::source_location location = ::std::source_location::current()) const
     {
@@ -36,7 +37,7 @@ public:
                            "\nrear = {}, front = {}, size = {}, capacity = {}, "
                            "\nfunc = {}"
                            "\n",
-                           m_rear, m_front, size(), m_capacity, location.function_name());
+                           m_rear, m_front, actual_size(), m_capacity, location.function_name());
     }
 
     size_t front()      const noexcept { return m_front; }
@@ -59,7 +60,7 @@ public:
     { 
     }
 
-    bool full()  const noexcept { return size() == m_capacity; }
+    bool full()  const noexcept { return actual_size() == m_capacity; }
     bool empty() const noexcept { return m_rear == m_front + 1; }
 
     size_t next_rear()      const noexcept { return (m_rear  + 1)  % (m_capacity); }
@@ -71,9 +72,11 @@ public:
     size_t increase_front()         noexcept { return m_front = next_front(); }
     size_t decrease_rear()          noexcept { return m_rear  = previous_rear();    }
     size_t decrease_front()         noexcept { return ::std::exchange(m_front, previous_front());   }
-    size_t size()             const noexcept { return m_size; }
-    void increase_size()            noexcept { ++m_size; }
-    void decrease_size()            noexcept { --m_size; }
+    size_t actual_size()      const noexcept { return m_size; }
+    size_t theoratical_size() const noexcept { return (m_rear - m_front + m_capacity) % m_capacity; }
+
+    void increase_size() noexcept { ++m_size; }
+    void decrease_size() noexcept { --m_size; }
 
     ::std::string describe(::std::source_location location = ::std::source_location::current()) const
     {
@@ -81,7 +84,7 @@ public:
                            "\nrear = {}, front = {}, size = {}, capacity = {}, "
                            "\nfunc = {}"
                            "\n",
-                           m_rear, m_front, size(), m_capacity, location.function_name());
+                           m_rear, m_front, actual_size(), m_capacity, location.function_name());
     }
 
     size_t front()      const noexcept { return m_front; }
@@ -100,7 +103,8 @@ concept queue_policy = requires(QP o)
 {
     { o.full()  } -> ::std::same_as<bool>;
     { o.empty() } -> ::std::same_as<bool>;
-    { o.size() } -> ::std::same_as<size_t>;
+    { o.actual_size() } -> ::std::same_as<size_t>;
+    { o.theoratical_size() } -> ::std::same_as<size_t>;
     { o.increase_rear() };
     { o.increase_front() };
     { o.decrease_rear() };
@@ -123,7 +127,7 @@ public:
 
     size_t push_rear()    
     { 
-        if (policy_.size() + 1 == policy_.capacity())
+        if (policy_.actual_size() + 1 == policy_.capacity())
             throw ::std::out_of_range{ policy_.describe() };
 
         const size_t i = policy_.increase_rear();   
@@ -138,7 +142,7 @@ public:
 
     size_t push_front()   
     { 
-        if (policy_.size() + 1 == policy_.capacity())
+        if (policy_.actual_size() + 1 == policy_.capacity())
             throw ::std::out_of_range{ policy_.describe() };
 
         const size_t i = policy_.decrease_front(); 
@@ -153,7 +157,7 @@ public:
 
     size_t pop_rear()     
     { 
-        if (policy_.size() - 1 < 0)
+        if (policy_.actual_size() - 1 < 0)
             throw ::std::out_of_range{ policy_.describe() };
 
         const size_t i = policy_.decrease_rear(); 
@@ -168,7 +172,7 @@ public:
 
     size_t pop_front()    
     { 
-        if (policy_.size() - 1 < 0)
+        if (policy_.actual_size() - 1 < 0)
             throw ::std::out_of_range{ policy_.describe() };
 
         const size_t i = policy_.increase_front(); 
@@ -183,7 +187,7 @@ public:
 
     bool full()     const noexcept { return policy_.full(); }
     bool empty()    const noexcept { return policy_.empty(); }
-    size_t size()   const noexcept { return policy_.size(); }
+    size_t size()   const noexcept { return policy_.actual_size(); }
 
     void clear() noexcept
     {
