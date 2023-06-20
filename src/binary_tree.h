@@ -3,6 +3,9 @@
 
 #include <string>
 #include <memory>
+#include "helpers.h"
+
+BEGIN_NAMESPACE_DSNUGEE
 
 struct bt_node
 {
@@ -26,5 +29,7 @@ private:
     ::std::vector<::std::unique_ptr<bt_node>> s_;
     Policy p_;
 };
+
+END_NAMESPACE_DSNUGEE
 
 #endif

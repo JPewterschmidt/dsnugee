@@ -2,8 +2,10 @@
 #include "fmt/core.h"
 #include "disjoint.h"
 #include <iostream>
+#include "helpers.h"
 
 using namespace ::std::string_view_literals;
+using namespace dsnugee;
 
 class disjoint_test : public ::testing::Test
 {

@@ -1,5 +1,7 @@
 #include "disjoint.h"
 
+using namespace dsnugee;
+
 int disjoint_set::find(int i) const
 {
     if (auto next_root = storage_.at(static_cast<size_t>(i)); next_root < 0) 

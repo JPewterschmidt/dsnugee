@@ -7,6 +7,9 @@
 #include <string>
 #include <source_location>
 #include "fmt/core.h"
+#include "helpers.h"
+
+BEGIN_NAMESPACE_DSNUGEE
 
 class q_policy1
 {
@@ -218,5 +221,7 @@ private:
     ::std::vector<int> s_;
     QP policy_{ s_.size() };
 };
+
+END_NAMESPACE_DSNUGEE
 
 #endif

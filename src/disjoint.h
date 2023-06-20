@@ -2,6 +2,9 @@
 #define NUGEE_DISJOINT_SET
 
 #include <vector>
+#include "helpers.h"
+
+BEGIN_NAMESPACE_DSNUGEE
 
 class disjoint_set
 {
@@ -18,5 +21,7 @@ public:
 private:
     ::std::vector<int> storage_;
 };
+
+END_NAMESPACE_DSNUGEE
 
 #endif

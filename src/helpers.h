@@ -17,7 +17,7 @@ struct is_specialization_of_helper<Primary<Args...>, Primary> : ::std::true_type
 };
 
 template<typename T, template<typename...> typename Primary>
-concept is_specialization_of = !!is_specialization_of_helper<T, Primary>{};
+concept is_specialization_of = !!is_specialization_of_helper<::std::decay_t<T>, Primary>{};
 
 END_NAMESPACE_DSNUGEE
 

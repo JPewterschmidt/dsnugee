@@ -1,6 +1,8 @@
 #include "queue.h"
 #include "gtest/gtest.h"
 
+using namespace dsnugee;
+
 TEST(queue, double_queue_policy1_positive_direction)
 {
     double_queue<q_policy1> q{ 5 };
