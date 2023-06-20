@@ -1,14 +1,20 @@
-#include "fmt/format.h"
 #include "fmt/core.h"
 #include "queue.h"
 #include "disjoint.h"
 #include "fmt/ranges.h"
+#include <stack>
+#include <tuple>
+#include <string>
+
+#include "generalized_table.h"
+
+using namespace ::std::string_literals;
+using namespace dsnugee;
 
 int main()
 {
-    double_queue<q_policy2> q{ 5 };
-    const auto& policy = q.get_policy();
-    for (int i = 0; i < 10; ++i)
-    {
-    }
+    ::std::tuple tt{ 1, 2, 3, "ssss"s };
+    fmt::print("{}\n", tt);
+    fmt::print("{}\n", head(tt));
+    fmt::print("{}\n", tail(tt));
 }
