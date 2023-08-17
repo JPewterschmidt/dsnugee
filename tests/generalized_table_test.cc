@@ -45,6 +45,5 @@ TEST(generalized_table, empty_table)
     ASSERT_EQ((is_specialization_of<decltype(t2), ::std::tuple>), true);
     ASSERT_EQ(::std::tuple_size<decltype(t2)>(), 0);
     ASSERT_EQ(t1, t2);
+    ASSERT_EQ(typeid(t1).name(), typeid(t2).name());
 }
-
-
