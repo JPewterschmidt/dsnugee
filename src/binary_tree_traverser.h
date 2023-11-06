@@ -35,14 +35,7 @@ public:
 
         auto last() noexcept
         {
-            const_node_ptr cur{ m_root }, result{};
-            while (true)
-            {
-                result = cur->right_most_leaf();
-                if (!result->has_child()) break;
-                cur = result->left();
-            }
-            return result;
+            return Policy{}.last_node_by_root(m_root);
         }
 
     private:
@@ -170,7 +163,7 @@ public:
 
     auto begin() const noexcept
     {
-        return iterator{ this, Policy{}.init(m_root) };
+        return iterator{ this, Policy{}.first_node_by_root(m_root) };
     }
 
     auto end() const noexcept
@@ -189,7 +182,17 @@ private:
 
 template<typename T>
 using root_first_traverser = 
-    binary_tree_traverser<root_first<typename binary_tree<T>::node_type>, typename binary_tree<T>::node_type>;
+binary_tree_traverser<
+    root_first<typename binary_tree<T>::node_type>, 
+    typename binary_tree<T>::node_type
+>;
+
+template<typename T>
+using root_last_traverser = 
+binary_tree_traverser<
+    root_last<typename binary_tree<T>::node_type>, 
+    typename binary_tree<T>::node_type
+>;
 
 END_NAMESPACE_DSNUGEE
 

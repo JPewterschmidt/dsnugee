@@ -84,7 +84,7 @@ int main()
     bt.insert(8);
     bt.insert(9);
 
-    root_first_traverser<int> rf{ bt };
+    root_last_traverser<int> rf{ bt };
     print(rf);
     print(rf);
     auto rv = ::std::ranges::reverse_view(rf);

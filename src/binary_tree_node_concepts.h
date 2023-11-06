@@ -14,6 +14,8 @@ concept is_binary_tree_node = requires(BTNode node)
     { node.left() }   -> ::std::same_as<const BTNode*>;
     { node.right() }  -> ::std::same_as<const BTNode*>;
     { node.parent() } -> ::std::same_as<const BTNode*>;
+    { node.is_left_child() } -> ::std::same_as<bool>;
+    { node.is_right_child() } -> ::std::same_as<bool>;
     node.set_left(::std::declval<BTNode*>());
     node.set_right(::std::declval<BTNode*>());
     node.set_parent(::std::declval<BTNode*>());
