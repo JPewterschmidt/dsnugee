@@ -1,4 +1,4 @@
-add_rules("mode.debug")
+add_rules("mode.debug", "mode.asan")
 
 add_requires("fmt", "gflags", "gtest")
 add_packages("fmt", "gflags", "gtest")
