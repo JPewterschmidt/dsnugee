@@ -1,0 +1,12 @@
+#ifndef NUGEE_HARDWARE_GENERIC_H
+#define NUGEE_HARDWARE_GENERIC_H
+
+#include "helpers.h"
+
+BEGIN_NAMESPACE_DSNUGEE
+
+
+
+END_NAMESPACE_DSNUGEE
+
+#endif
