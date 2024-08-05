@@ -31,7 +31,7 @@ public:
         {
             if (first_multip_lowerbit())
             {
-                ALU<N>{}.add(m_acc, m_x);
+                ALU<N>{}.add(m_acc, x());
             }
             m_mq >>= 1;
             m_mq[N - 1] = m_acc[0];
@@ -43,15 +43,9 @@ public:
     }
 
 private:
-    bool first_multip_lowerbit() const
-    {
-        return m_mq[0];
-    }
-
-    static consteval ::std::size_t numeric_bitlen() noexcept 
-    {
-        return N - 1;
-    }
+    bool first_multip_lowerbit() const { return m_mq[0]; }
+    static consteval ::std::size_t numeric_bitlen() noexcept { return N - 1; }
+    const rep& x() const noexcept { return m_x; }
 
 private:
     rep m_x{};

@@ -10,4 +10,5 @@ TEST(simulators, fixed_point_multiplier_simulator_test)
     ::std::bitset<scale> x("11101"), y("01011");
     const auto result = fixed_point_multiplier_simulator<scale, alu>(x, y).execute();
     ASSERT_EQ(result, ::std::bitset<scale>("11000")) << result.to_string();
+    ASSERT_EQ(sizeof(alu_flags), sizeof(uint8_t));
 }
