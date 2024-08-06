@@ -2,7 +2,7 @@ add_rules("mode.debug", "mode.asan")
 
 add_requires("fmt", "gflags", "gtest")
 add_packages("fmt", "gflags", "gtest")
-set_languages("c++2b")
+set_languages("c++23")
 set_toolset("cc", "gcc")
 set_toolset("cxx", "g++")
 
