@@ -14,7 +14,7 @@
 #include "helpers.h"
 #include <algorithm>
 #include <iterator>
-#include "quick_sort.h"
+#include "sort.h"
 #include "kmp.h"
 #include "binary_tree.h"
 #include "binary_tree_traverser.h"

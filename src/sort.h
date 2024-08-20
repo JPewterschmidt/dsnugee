@@ -1,5 +1,5 @@
-#ifndef DSNUGEE_QUICK_SORT
-#define DSNUGEE_QUICK_SORT
+#ifndef DSNUGEE_SORT
+#define DSNUGEE_SORT
 
 #include <algorithm>
 #include "helpers.h"

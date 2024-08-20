@@ -1,9 +1,9 @@
-#include "quick_sort.h"
+#include "sort.h"
 #include "gtest/gtest.h"
 
 #include <vector>
 
-TEST(quick_sort, basic)
+TEST(sort, quick_sort)
 {
     ::std::vector v1{ 5,6,7,8,4,32,44,5,6,8,8,99 };
     ::std::vector v2 = v1;
