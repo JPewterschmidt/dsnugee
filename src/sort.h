@@ -40,8 +40,10 @@ void bobble_sort(::std::forward_iterator auto first, ::std::forward_iterator aut
     }
 }
 
-void insert_sort(::std::random_access_iterator auto first, ::std::random_access_iterator auto last)
+void insert_sort(::std::bidirectional_iterator auto first, ::std::bidirectional_iterator auto last)
 {
+    // Best:    O(n)
+    // Worst:   O(n^2)
     if (first == last) 
         return;
 
